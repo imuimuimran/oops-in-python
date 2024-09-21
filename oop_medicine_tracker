@@ -1,0 +1,45 @@
+class MedicineTracker:
+    def __init__(self):
+        self.secrin_count = 10  # Initial count for Secrin
+        self.lintab_count = 10   # Initial count for Lintab
+        self.day = 1             # Start tracking from Day 1
+
+    def take_medicine(self):
+        # Determine which medicine to take
+        if self.secrin_count == self.lintab_count:
+            medicine_taken = "Secrin"
+        elif self.secrin_count < self.lintab_count:
+            medicine_taken = "Lintab"
+        else:
+            medicine_taken = "Secrin"
+
+        # Display the counts before taking medicine
+        self.display_counts(medicine_taken)
+
+        # Update the count for the taken medicine
+        if medicine_taken == "Secrin":
+            self.secrin_count -= 1
+        else:
+            self.lintab_count -= 1
+
+        # Display the counts after taking medicine
+        self.display_after_counts()
+
+        self.day += 1
+
+    def display_counts(self, medicine_taken):
+        print(f"Day {self.day}: Secrin left = {self.secrin_count}, Lintab left = {self.lintab_count}")
+        print(f"Mona should take {medicine_taken} today.")
+
+    def display_after_counts(self):
+        print(f"After taking today's medicine: Secrin left = {self.secrin_count}, Lintab left = {self.lintab_count}\n")
+
+# Create an instance of MedicineTracker
+tracker = MedicineTracker()
+
+# Simulate the days until one of the medicines runs out
+while tracker.secrin_count >= 0 and tracker.lintab_count > 0:
+    tracker.take_medicine()
+
+# Notify when the medicines have ended
+print("Your medicine has been ended!")
